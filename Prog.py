@@ -1,5 +1,5 @@
 from tkinter import *
-
+import json
 
 root = Tk()
 but_type_test = Button(root,
@@ -16,8 +16,8 @@ but_finish = Button(root,
                     bg='white', fg='blue')
 
 lab = Label(root,
-                text="Please, choose type of question",
-                font="Arial 10")
+            text="Please, choose type of question",
+            font="Arial 12")
 
 lab.pack()
 
@@ -25,7 +25,7 @@ but_type_test.pack(side='left')
 but_finish.pack(side='right')
 but_type_exact.pack(side='bottom')
 
-dict = {}
+main_dict = {}
 
 def fun(event):
     # test question
@@ -38,16 +38,17 @@ def fun(event):
     for i in range(3):
         answer = input("Enter the answer -> ")
         lst_answer.append(answer)
-    dict[question] = lst_answer
+    main_dict[question] = lst_answer
 
 def bun(event):
     # exact question
     question = input("Enter the question -> ")
     answer = input("Enter the answer -> ")
-    dict[question] = answer
+    main_dict[question] = answer
 
 def ret(event):
-    print(dict)
+    print(main_dict)
+    json.dump(main_dict, open("test.json", "w"))
 
 but_type_test.bind("<Button-1>", fun)
 but_type_exact.bind("<Button-1>", bun)
